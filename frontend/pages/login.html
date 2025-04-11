@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+/* Forgot Password Link */
+.forgot-password {
+    color: #ff9800;
+    cursor: pointer;
+    margin-top: 10px;
+    text-decoration: underline;
+    font-size: 14px;
+    transition: 0.3s;
+    display: block;
+    text-align: center;
+}
+
+.forgot-password:hover {
+    color: #e68900;
+}
+
+/* Hidden Reset Form (Initially Hidden) */
+#reset-password-form {
+    display: none;
+    margin-top: 15px;
+    text-align: center;
+    animation: slideDown 0.5s ease-in-out;
+}
+
+/* Reset Password Input */
+#reset-password-form input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 1px solid #ff9800;
+    outline: none;
+    background: #222;
+    color: white;
+    text-align: center;
+    transition: 0.3s;
+}
+
+#reset-password-form input:focus {
+    border-color: #e68900;
+    background: #333;
+}
+
+/* Reset Password Button */
+#reset-button {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background: #ff9800;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+#reset-button:hover {
+    background: #e68900;
+    transform: scale(1.05);
+}
+
+/* Slide Down Animation */
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Centering the Login Container */
+.login-container {
+    width: 350px;
+    background: #222;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin: 50px auto;
+}
+
+.login-container h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+.login-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 20px;
+    border: 1px solid #ff9800;
+    outline: none;
+    background: #333;
+    color: white;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.login-container input:focus {
+    border-color: #e68900;
+    background: #444;
+}
+
+/* Login Button */
+#login-button {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background: #ff9800;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+#login-button:hover {
+    background: #e68900;
+    transform: scale(1.05);
+}
+
+    </style>
+
+
+
+    <script>
+        async function login(event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorMessage = document.getElementById("error-message");
+            const loginButton = document.getElementById("login-button");
+
+            errorMessage.textContent = ""; // Clear previous errors
+
+            // Basic validation
+            if (username.length < 3 || password.length < 5) {
+                errorMessage.textContent = "Invalid username or password.";
+                return;
+            }
+
+            try {
+                loginButton.disabled = true; // Disable button during request
+                loginButton.textContent = "Logging in..."; // Show loading state
+
+                const response = await fetch("/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, password }),
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    window.location.href = "/admin"; // Redirect to admin panel
+                } else {
+                    errorMessage.textContent = result.message || "Login failed.";
+                }
+            } catch (error) {
+                errorMessage.textContent = "Network error. Please try again.";
+            } finally {
+                loginButton.disabled = false; // Enable button again
+                loginButton.textContent = "Login"; // Reset button text
+            }
+        }
+
+        function showForgotPassword() {
+    document.getElementById("reset-password-form").style.display = "block";
+}
+
+
+
+
+
+// Show Forgot Password Form
+function showForgotPassword() {
+    document.getElementById("reset-password-form").style.display = "block";
+}
+
+// Send Reset Password Email
+async function sendResetEmail() {
+    const email = document.getElementById("reset-email").value;
+
+    if (!email) {
+        alert("Please enter your email");
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+        alert(data.message);
+    } catch (error) {
+        alert("Error sending email. Try again.");
+    }
+}
+
+// Reset Password
+async function resetPassword() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const newPassword = document.getElementById("new-password").value;
+
+    if (!newPassword) {
+        alert("Please enter a new password");
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/reset-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token, newPassword }),
+        });
+
+        const data = await response.json();
+        document.getElementById("reset-message").textContent = data.message;
+        alert("Password updated successfully! You can now log in.");
+        window.location.href = "/login.html"; // Redirect to login
+    } catch (error) {
+        alert("Invalid or expired token");
+    }
+}
+
+
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form onsubmit="login(event)">
+            <input type="text" id="username" placeholder="Username" required autocomplete="off">
+            <input type="password" id="password" placeholder="Password" required autocomplete="off">
+            <button id="login-button" type="submit">Login</button>
+            <p style="color: white;" id="error-message"></p>
+        </form>
+    
+        <p class="forgot-password" onclick="showForgotPassword()">Forgot Password?</p>
+    
+        <div id="reset-password-form" style="display: none;">
+            <input type="email" id="reset-email" placeholder="Enter your email">
+            <button id="login-button" onclick="sendResetEmail()">Send Reset Link</button>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

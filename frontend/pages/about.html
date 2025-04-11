@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About </title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>  <!--remix icon -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color:rgb(247, 115, 33);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Back Button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background: #5c4b5c;
+        }
+
+        /* Section Heading */
+        .section-heading {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* About Section */
+        .blog-section {
+            background-color: white;
+            padding: 50px 5%;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+
+        .blog-container {
+            display: flex;
+            align-items: center;
+            max-width: 1000px;
+            line-height: 1.6;
+            margin: auto;
+        }
+
+        .blog-left {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .blog-profile-img {
+            width: 250px;
+            height: 350px;
+            border-radius: 50% 50% 0 0;
+            object-fit: cover;
+        }
+
+        .blog-overlay-img {
+            position: absolute;
+            bottom: -40px;
+            left: -20px;
+            width: 150px;
+            height: 150px;
+            object-fit:cover;
+            overflow: hidden;
+            border-radius: 50%;  /* Makes the image circular */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-overlay-img {
+            clip-path: circle(50%);
+        }
+
+        .blog-right {
+            flex: 1.5;
+            padding: 30px;
+        }
+
+        .blog-subtitle {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin: 5px 0 15px;
+        }
+
+        .blog-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 2px solid rgb(230, 123, 52);
+            text-decoration: none;
+            color: rgb(230, 123, 52);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .blog-btn:hover {
+            background: linear-gradient(to bottom right, #FF9933, #FF6600);
+            color: white;
+        }
+
+        /* Form Section */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .left {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .right {
+            padding: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #5c4b5c;
+            box-shadow: 0px 0px 8px rgba(92, 75, 92, 0.5);
+            outline: none;
+        }
+
+        button {
+            background: linear-gradient(to bottom right, #FF9933, #FF6600);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background:#FF6600 ;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+        
+        .social-media {
+            display: flex;
+            justify-content: center;
+            font-size: 34px;
+            margin-right: 10px;
+        }
+        .social-media a{
+            text-decoration: none;
+            color: black;
+        }
+        .social-media a:hover{
+            color: rgb(173, 229, 32);
+        }
+
+        /* rights reserved */
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            border-top: 1px solid #878c98;
+            padding-top: 10px;
+            color: #131313;
+}
+        /* ✅ Responsive Design */
+        @media (max-width:612px){
+            .back-button{
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .blog-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .blog-left {
+                margin-bottom: 20px;
+            }
+
+            .blog-overlay-img {
+                width: 150px;
+                height: 150px;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -30px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .right {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Back Button -->
+<button class="back-button" onclick="goBack()">⬅️ Back</button>
+
+<!-- Section Heading -->
+<h2 class="section-heading">Welcome to ShravanDubeyBlogs</h2>
+
+<!-- ShravanDubeyBlogs Section -->
+<section class="blog-section">
+    <div class="blog-container">
+        <div class="blog-left">
+            <img src="/photo.jpg" alt="Profile Picture" class="blog-profile-img">
+            <img src="/HSS Logo HD.png" alt="Overlay Image" class="blog-overlay-img">
+        </div>
+        <div class="blog-right">
+            <h1>ShravanDubeyBlogs</h1>
+            <div class="blog-subtitle">
+                <span>Exploring Politics, Country, and Religion Insights & Opinions</span>
+            </div>
+            <p>
+                ShravanDubeyBlogs is a platform where I share my thoughts and insights on politics, country, and religion. 
+                It's a space for exploring and discussing the complexities of these topics. Join me in this journey of critical thinking and analysis.
+                Here, I delve into the nuances of social and political issues, offering my perspectives and opinions. 
+                My aim is to provoke thoughtful conversations and encourage a deeper understanding of the world around us.
+                Feel free to explore the articles, engage with the content, and share your own viewpoints. 
+                Together, let's navigate the intricate tapestry of politics, country, and religion.
+            </p>
+            <a href="/blogs.html" class="blog-btn">Read My Blog</a>
+        </div>
+    </div>
+</section>
+
+<!-- Form Section -->
+<div class="container">
+    <div class="left">
+        <h2>Need Information?</h2>
+        <p>Tell us the topics you are interested in and subscribe for updates.</p>
+    </div>
+    <div class="right">
+        <form id="contactForm">
+            <label>First Name</label>
+            <input type="text" name="first_name" required>
+
+            <label>Last Name</label>
+            <input type="text" name="last_name" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Short Answer</label>
+            <textarea name="message" required></textarea>
+
+            <label><input type="checkbox" name="subscribe"> Subscribe to our newsletter</label>
+
+            <button type="submit">Submit</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+</div>
+
+ <!-- Social media accounts -->
+    <div class="social-media">
+        <a href="#"><i class="ri-facebook-circle-fill"></i></a>
+        <a href="#"><i class="ri-instagram-fill"></i></a>
+        <a href="#"><i class="ri-twitter-x-line"></i></a>
+    </div>
+
+    <!-- Rights Reserved -->
+    <div class="footer-bottom">
+        <p>© 2025 ShravanDubeyBlogs.com All Rights Reserved.</p>
+    </div>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+</body>
+</html>

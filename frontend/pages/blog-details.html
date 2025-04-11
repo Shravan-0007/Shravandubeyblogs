@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Details</title>
+    <style>
+        /* Blog Details Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FF9933; /* Kesari-colored background */
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+/* Blog Details Section */
+#blog-details {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+#blog-details h1 {
+    font-size: 28px;
+    color: #FF5733;
+}
+
+#blog-details img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#blog-details p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+/* Related Blogs Section */
+#suggested-blogs {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+#suggested-blogs h3 {
+    color: #FF5733;
+    text-align: center;
+}
+
+.related-blog {
+    background: #f8f9fa;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover effect for Related Blogs */
+.related-blog:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.related-blog h4 {
+    margin: 0;
+    color: #333;
+}
+
+.related-blog p {
+    font-size: 16px;
+    color: #666;
+}
+
+.related-blog a {
+    display: inline-block;
+    margin-top: 5px;
+    color: #FF5733;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.related-blog a:hover {
+    text-decoration: underline;
+}
+
+/* Comment section */
+#comments-section {
+  margin: 30px auto;
+  padding: 20px;
+  width: 80%;
+  background-color: #fff8f0; /* Light kesari tone */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+#comments-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #d97706; /* Kesari-colored heading */
+}
+
+#comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+#comment-form input,
+#comment-form textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+#comment-form input:focus,
+#comment-form textarea:focus {
+  border-color: #f59e0b;
+  outline: none;
+}
+
+#comment-form button {
+  align-self: flex-start;
+  padding: 8px 16px;
+  background-color: #f97316;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#comment-form button:hover {
+  background-color: #ea580c;
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background-color: #fffefc;
+  border-left: 4px solid #f97316;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #facc15; /* yellow tone */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #1f2937;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-content strong {
+  color: #1e293b;
+  font-weight: bold;
+}
+
+.comment-content small {
+  color: #6b7280;
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+
+/* Subtle fade-in effect */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Blog Details</h1>
+        <a href="index.html">Back to Home</a>
+    </header>
+
+    <div id="blog-details"></div>
+    <section id="comments-section">
+        <h3>Comments</h3>
+        <div id="comments-container"></div>
+        <form id="comment-form">
+          <input type="text" id="commenter-name" placeholder="Your Name (optional)">
+          <textarea id="comment-text" placeholder="Write a comment..." required></textarea>
+          <button type="submit">Post Comment</button>
+        </form>
+      </section>      
+    <hr>
+    <div id="suggested-blogs">
+        <h3>Related Blogs</h3>
+    </div>
+
+    <script src="/scripts.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+    const blogDetailsContainer = document.getElementById("blog-details");
+    const suggestedBlogsContainer = document.getElementById("suggested-blogs");
+
+    // Get blog ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogId = urlParams.get("id");
+
+    if (blogId) {
+        try {
+            let response = await fetch(`/blog/${blogId}`);
+            let blog = await response.json();
+
+            if (!blog || blog.error) {
+                blogDetailsContainer.innerHTML = "<p>Blog not found.</p>";
+                return;
+            }
+
+            // Display the main blog details
+            blogDetailsContainer.innerHTML = `
+                <h1>${blog.title}</h1>
+                <p><strong>Published on:</strong> ${new Date(blog.createdAt).toDateString()}</p>
+                <img src="${blog.image || 'default.jpg'}" alt="${blog.title}" style="width: 100%; max-height: 400px; object-fit: cover;">
+                <p>${blog.content ? blog.content.replace(/\n/g, "<br>") : "No content available."}</p>
+                <p><strong>Views:</strong> ${blog.views || 0}</p>
+            `;
+
+            // Call function to fetch related blogs
+            fetchRelatedBlogs(blogId);
+        } catch (error) {
+            console.error("Error fetching blog details:", error);
+            blogDetailsContainer.innerHTML = "<p>Error loading blog details.</p>";
+        }
+    } else {
+        blogDetailsContainer.innerHTML = "<p>No blog selected.</p>";
+    }
+});
+
+// Function to fetch related blogs
+async function fetchRelatedBlogs(currentBlogId) {
+    const suggestedBlogsContainer = document.getElementById("suggested-blogs");
+    try {
+        let response = await fetch(`/latest-blogs`);
+        let blogs = await response.json();
+
+        // Exclude the current blog from suggestions
+        let relatedBlogs = blogs.filter(blog => blog._id !== currentBlogId).slice(0, 3);
+
+        if (relatedBlogs.length > 0) {
+            suggestedBlogsContainer.innerHTML = "<h3>Related Blogs</h3>"; // Reset section
+            relatedBlogs.forEach(blog => {
+                let blogDiv = document.createElement("div");
+                blogDiv.classList.add("related-blog");
+                blogDiv.innerHTML = `
+                    <h4>${blog.title}</h4>
+                    <p>${blog.description}</p>
+                    <a href="blog-details.html?id=${blog._id}">Read More</a>
+                `;
+                suggestedBlogsContainer.appendChild(blogDiv);
+            });
+        } else {
+            suggestedBlogsContainer.innerHTML = "<p>No related blogs available.</p>";
+        }
+    } catch (error) {
+        console.error("Error fetching related blogs:", error);
+        suggestedBlogsContainer.innerHTML = "<p>Could not load related blogs.</p>";
+    }
+}
+    </script>
+
+</body>
+</html>

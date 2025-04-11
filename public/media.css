@@ -1,0 +1,122 @@
+@media (max-width: 1500px) {
+    .footer-column{
+        margin-left: 50px;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.4s ease-in-out, opacity 0.3s ease-in-out;
+        z-index: 999;
+        opacity: 0;
+    }
+
+    .nav-list.active {
+        right: 0;
+        opacity: 1;
+    }
+
+    /* Background Blur Effect when menu opens */
+    .menu-blur {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(5px);
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        display: none;
+    }
+
+    .menu-blur.active {
+        display: block;
+    }
+
+    .blog-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+    }
+}
+
+
+
+@media (max-width: 768px) {
+        .blog-card {
+            flex-direction: column !important; /* Ensures ALL cards become column-based */
+            text-align: center;
+            align-items: center;
+            padding: 15px; /* 🔥 Added padding */
+        }
+
+        .blog-card img {
+            width: 100%; /* Full width for small screens */
+            height: auto;
+            border-radius: 12px;
+            margin: 10px; /* 🔥 Ensures margin from all sides */
+        }
+
+        .blog-content {
+            padding: 15px;
+        }
+        .subscription-box input[type="email"] {
+            width: 80%;
+        }
+}
+
+
+@media (max-width: 600px) {
+    .blog-container {
+        grid-template-columns: repeat(1, 1fr); /* 1 column for mobile */
+    }
+    .content-section {
+        flex-direction:column;
+        text-align: center;
+        padding: 15px;
+    }
+    .content-section img {
+        margin-bottom: 15px;
+        margin-right: 0;
+    }
+    .content-text {
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 565px) {
+    .logo h1{
+        font-size: 1rem;
+    }
+    .search-container{
+        width: 200px;
+    }
+    .blog-post {
+        width: calc(100% - 2rem);
+    }
+    .footer-column{
+        text-align: center;
+        margin: 0%;
+     }
+}
+
+@media  screen and (max-width: 430px) {
+    #img1{
+        margin-left: 15px;
+    }
+    #img2{
+        margin-right: 40px;
+    }
+}

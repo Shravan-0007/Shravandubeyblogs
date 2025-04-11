@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <style>
+      /* General Styling */
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      /* Admin Container */
+      .admin-container {
+        width: 80%;
+        background: linear-gradient(to bottom right, #ff9933, #ff6600);
+        padding: 20px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      /* Form Styling */
+      .add-blog-form {
+        background: #fff;
+        padding: 15px;
+        margin: 0 20px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .add-blog-form input,
+      textarea {
+        width: 95%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+        font-size: 16px;
+      }
+
+      .add-blog-form input:hover,
+      textarea:hover {
+        border-color: #ff9800;
+        box-shadow: 0 0 8px rgba(255, 152, 0, 0.5);
+      }
+
+      .add-blog-form input:focus,
+      textarea:focus {
+        border-color: #e68900;
+        box-shadow: 0 0 12px rgba(230, 137, 0, 0.7);
+        outline: none;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .publish-btn {
+        background: #28a745;
+        color: white;
+      }
+
+      .publish-btn:hover {
+        background: #218838;
+      }
+
+      .delete-btn {
+        background: #dc3545;
+        color: white;
+      }
+
+      .delete-btn:hover {
+        background: #c82333;
+      }
+
+      /* Blog Styling */
+      .blog-container {
+        display: flex;
+        flex-direction:column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+      .blog-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        max-width: 300px; /* Adjust width as needed */
+        text-align: center;
+        background-color: #fff;
+      }
+
+      .blog-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+        margin: 10px 0;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      button {
+        padding: 8px 12px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #ff9800;
+        color: white;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background-color: #e68900;
+      }
+
+      /* Edit blog */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        text-align: center;
+        width: 50%;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      .modal input,
+      textarea {
+        width: 95%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+        font-size: 16px;
+      }
+
+      .modal input:hover,
+      textarea:hover {
+        border-color: #ff9800;
+        box-shadow: 0 0 8px rgba(255, 152, 0, 0.5);
+      }
+
+      .modal input:focus,
+      textarea:focus {
+        border-color: #e68900;
+        box-shadow: 0 0 12px rgba(230, 137, 0, 0.7);
+        outline: none;
+      }
+      .close-btn {
+        float: right;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .admin-container {
+          width: 95%;
+        }
+
+        .blog-card {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-container">
+      <h1>Admin Dashboard</h1>
+
+      <!-- Add New Blog Form -->
+      <div class="add-blog-form">
+        <h3>Add New Blog</h3>
+        <input type="text" id="title" placeholder="Enter Blog Title" />
+        <input type="text" id="description" placeholder="Enter Description" />
+        <textarea id="content" placeholder="Enter Blog Content"></textarea>
+        <input type="text" id="image" placeholder="Enter Image URL" />
+        <button id="saveDraftBtn">Save as Draft</button>
+      </div>
+
+      <!-- Unpublished Blogs -->
+      <h2>Unpublished Blogs</h2>
+      <div class="blog-container" id="unpublishedBlogs"></div>
+
+      <!-- Published Blogs -->
+      <h2>Published Blogs</h2>
+      <div class="blog-container" id="publishedBlogs"></div>
+
+      <!-- Edit Blog Modal -->
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <h2>Edit Blog</h2>
+          <input type="hidden" id="editBlogId" />
+          <input type="text" id="editTitle" placeholder="Enter Blog Title" />
+          <input
+            type="text"
+            id="editDescription"
+            placeholder="Enter Description"
+          />
+          <textarea
+            id="editContent"
+            placeholder="Enter Blog Content"
+          ></textarea>
+          <input type="text" id="editImage" placeholder="Enter Image URL" />
+          <button id="updateBlogBtn">Update Blog</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/admin.js"></script>
+  </body>
+</html>
